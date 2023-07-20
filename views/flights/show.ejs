@@ -1,0 +1,48 @@
+<%- include('../partials/header') %>
+
+<section id="'show-page">
+    <div>Airline:</div>
+    <div><%= f.airline %></div>
+    <div>Airport:</div>
+    <div><%= f.airport %></div>
+    <div>Flight Number:</div>
+    <div><%= f.flightNo %></div>
+    <div>Departure Date:</div>
+    <div><%= f.departs %></div>
+
+
+    <% flight.destinatins.forEach(function(place) { %>
+        <div>Arrival Airport: </div>
+        <div><%= place.airport %></div>
+        <div>Arrival Date/Time:</div>
+        <div><%= place.arrival %></div>
+   <% }) %>
+
+       <% tickets.forEach(function(ticket) { %>
+        <div>Price:</div>
+        <div><%= ticket.price %></div>
+        <div>Seat:</div>
+        <div><%= ticket.seat %></div>
+       <% }) %>
+</section>
+<section>
+<h2>Arrival Details</h2>
+<form id="add-arrival-form" action="/flights/<%= flight._id %>" method="POST">
+   <label>Arrival Airport:</label> 
+   <select name="airport">
+    <option value="AUS">Austin</option>
+    <option value="DFW">Dallas Fort Worth</option>
+    <option value="DEN">Denver</option>
+    <option value="LAX">Los Angeles</option>
+    <option value="SAN">San Diego</option>
+   </select>
+    <label>Arrival Date/Time</label>
+    <input type="datetime-local" name="arrival">
+    <input type="submit" value="Add Arrival">
+    <button>
+        <a href="/flights/<%= flight._id %>/tickets/new">Add Ticket</a>
+    </button>
+</form>
+</section>
+
+<%- include('../partials/footer') %>
